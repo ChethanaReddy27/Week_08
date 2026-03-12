@@ -6,8 +6,10 @@ import {useTest} from '../store/TestStore.js'
 function A() {
 
   const inputRef = useRef(null)
-  let {counter1, changeCounter1} = useContext( CounterContext )
-  let {user, changeUser} = useContext(UserContext)
+  const counterCtx = useContext(CounterContext) || {}
+  let {counter1, changeCounter1} = counterCtx
+  const userCtx = useContext(UserContext) || {}
+  let {user, changeUser} = userCtx
   let userObj = useTest(state => state.userObj)
   let updateObj = useTest(state => state.updateObj)
   let changeName = useTest(state => state.changeName)
@@ -21,8 +23,8 @@ function A() {
     <div className="p-4 m-2 border text-center">
       <h2 className="text-lg font-bold mb-2">A component</h2>
       <p>Counter1: {counter1}</p>
-      <p>User name: {user.name}</p>
-      <p>email: {user.email}</p>
+      <p>User name: {user?.name}</p>
+      <p>email: {user?.email}</p>
       <button className="bg-blue-200 p-2 m-1" onClick={changeCounter1}>Change Counter1</button>
       <button onClick={changeUser} className="bg-blue-300 p-2 m-1">Change User</button>
       <p>UserObj name: {userObj.name}</p>

@@ -1,19 +1,24 @@
-import React from 'react'
-import { useState } from 'react'
-import { CounterContext } from '../contexts/CounterContext'
+import { useState } from "react"
+import { CounterContext } from "./CounterContext"
 
-function CounterContextProvider({children}) {
+function CounterContextProvider({ children }) {
 
-    //state
-    const [counter1, setCounter1] = useState(1)
+  const [counter1, setCounter1] = useState(0)
+  const [counter2, setCounter2] = useState(0)
 
-    //function to modify
-    const changeCounter1 = () =>{
-        setCounter1(counter1 + 1)
-    }
+  const changeCounter1 = () => {
+    setCounter1(prev => prev + 1)
+  }
+
+  const changeCounter2 = () => {
+    setCounter2(prev => prev + 1)
+  }
+
   return (
-    <CounterContext.Provider value={{ counter1, changeCounter1}}>
-        { children }
+    <CounterContext.Provider
+      value={{ counter1, counter2, changeCounter1, changeCounter2 }}
+    >
+      {children}
     </CounterContext.Provider>
   )
 }

@@ -11,15 +11,17 @@ function B() {
   const decrementX = useTest(state => state.decrementX)
   const incrementXByValue = useTest(state => state.incrementXByValue)
 
-  let {counter1, changeCounter1} = useContext(CounterContext)
-  let {user, changeUser} = useContext(UserContext)
+  const counterCtx = useContext(CounterContext) || {}
+  let {counter1, changeCounter1} = counterCtx
+  const userCtx = useContext(UserContext) || {}
+  let {user, changeUser} = userCtx
   console.log('B rendered')
   return (
     <div className="p-4 m-2 border text-center">
       <h2 className="text-lg font-bold mb-2">B Component</h2>
       <p>Counter1: {counter1}</p>
-      <p>User name: {user.name}</p>
-      <p>email: {user.email}</p>
+      <p>User name: {user?.name}</p>
+      <p>email: {user?.email}</p>
       <button className="bg-blue-200 p-2 m-1" onClick={changeCounter1}>Change Counter1</button>
       <button onClick={changeUser} className="bg-blue-300 p-2 m-1">Change User</button>
       <p>x: {x}</p>

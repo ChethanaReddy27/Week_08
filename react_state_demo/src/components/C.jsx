@@ -1,25 +1,21 @@
 import React from 'react'
 import { useContext } from 'react'
 import { CounterContext } from '../contexts/CounterContext'
-import {useTest} from '../store/TestStore'
+import { UserContext } from '../contexts/UserContext'
 
 function C() {
+  const counterCtx = useContext(CounterContext) || {}
+  const { counter2, changeCounter2 } = counterCtx
+  const userCtx = useContext(UserContext) || {}
+  const { user, changeUser } = userCtx
 
-  //get state from zustand store
-  const y = useTest(state => state.y)
-  const incrementY = useTest(state => state.incrementY)
-  
-  //console.log(useTest(), x)
-
-  const {counter1, changeCounter1} = useContext(CounterContext)
-  console.log('C rendered')
   return (
     <div className="p-4 m-2 border text-center">
-      <h2 className="text-lg font-bold mb-2">C component</h2>
-      <p>Counter1: {counter1}</p>
-      <button className="bg-blue-200 p-2 m-1" onClick={changeCounter1}>Change Counter1</button>
-      <p>y: {y}</p>
-      <button className="bg-blue-100 p-1 m-1 mt-2" onClick={incrementY}>Increment Y</button>
+      <h2 className="text-lg font-bold mb-2">C Component</h2>
+      <p>Counter2: {counter2}</p>
+      <button className="bg-blue-200 p-2 m-1" onClick={changeCounter2}>Change Counter2</button>
+      <p>User: {user?.name} {user?.email ? `(${user.email})` : ''}</p>
+      <button onClick={changeUser} className="bg-blue-300 p-2 m-1">Change User</button>
     </div>
   )
 }

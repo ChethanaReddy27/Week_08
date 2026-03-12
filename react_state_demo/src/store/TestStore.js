@@ -5,7 +5,7 @@ export const useTest = create((set) => ({
     x:10,
     y:5,
     userObj: {
-        name: "Shobu",
+        name: "Chethana",
         age: 21
     },
     //functions to modify state
